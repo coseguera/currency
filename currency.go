@@ -47,6 +47,15 @@ func (c Currency) Multiply(f float64) Currency {
 	return Currency((float64(c) * f) + half)
 }
 
+func Divide(c Currency, f float64) Currency {
+	half := 0.5
+	if (f < 0) != (c < 0) {
+		half -= 1
+	}
+
+	return Currency((float64(c) / f) + half)
+}
+
 func (c Currency) String() string {
 	return fmt.Sprintf("$%.2f", c.Float64())
 }
