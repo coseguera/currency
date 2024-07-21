@@ -94,6 +94,18 @@ func (c Currency) LessThanOrEqual(c2 Currency) bool {
 	return c.cents <= c2.cents
 }
 
+func (c Currency) IsZero() bool {
+	return c.cents == 0
+}
+
+func (c Currency) IsPositive() bool {
+	return c.cents > 0
+}
+
+func (c Currency) IsNegative() bool {
+	return c.cents < 0
+}
+
 func (c Currency) String() string {
 	return fmt.Sprintf("$%.2f", c.Float64())
 }
