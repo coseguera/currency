@@ -14,10 +14,10 @@ func TestCurrency_Multiply(t *testing.T) {
 		args args
 		want Currency
 	}{
-		{"100x2", Currency(100), args{2}, Currency(200)},
-		{"100x-2", Currency(100), args{-2}, Currency(-200)},
-		{"-100x2", Currency(-100), args{2}, Currency(-200)},
-		{"-100x-2", Currency(-100), args{-2}, Currency(200)},
+		{"100x2", NewCurrency(1), args{2}, NewCurrency(2)},
+		{"100x-2", NewCurrency(1), args{-2}, NewCurrency(-2)},
+		{"-100x2", NewCurrency(-1), args{2}, NewCurrency(-2)},
+		{"-100x-2", NewCurrency(-1), args{-2}, NewCurrency(2)},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -28,24 +28,24 @@ func TestCurrency_Multiply(t *testing.T) {
 	}
 }
 
-func TestDivide(t *testing.T) {
+func TestCurrency_Divide(t *testing.T) {
 	type args struct {
-		c Currency
 		f float64
 	}
 	tests := []struct {
 		name string
+		c    Currency
 		args args
 		want Currency
 	}{
-		{"100/2", args{Currency(100), 2}, Currency(50)},
-		{"100/-2", args{Currency(100), -2}, Currency(-50)},
-		{"-100/2", args{Currency(-100), 2}, Currency(-50)},
-		{"-100/-2", args{Currency(-100), -2}, Currency(50)},
+		{"100/2", NewCurrency(1), args{2}, NewCurrency(.50)},
+		{"100/-2", NewCurrency(1), args{-2}, NewCurrency(-.50)},
+		{"-100/2", NewCurrency(-1), args{2}, NewCurrency(-.50)},
+		{"-100/-2", NewCurrency(-1), args{-2}, NewCurrency(.50)},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Divide(tt.args.c, tt.args.f); got != tt.want {
+			if got := tt.c.Divide(tt.args.f); got != tt.want {
 				t.Errorf("Divide() = %v, want %v", got, tt.want)
 			}
 		})
