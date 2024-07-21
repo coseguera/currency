@@ -40,6 +40,18 @@ func (c Currency) Float64() float64 {
 	return float64(c.cents) / 100
 }
 
+func (c Currency) Add(c2 Currency) Currency {
+	return Currency{
+		cents: c.cents + c2.cents,
+	}
+}
+
+func (c Currency) Subtract(c2 Currency) Currency {
+	return Currency{
+		cents: c.cents - c2.cents,
+	}
+}
+
 func (c Currency) Multiply(f float64) Currency {
 	half := 0.5
 	if (f < 0) != (c.cents < 0) {
