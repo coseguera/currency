@@ -74,6 +74,26 @@ func (c Currency) Divide(f float64) Currency {
 	}
 }
 
+func (c Currency) Equal(c2 Currency) bool {
+	return c.cents == c2.cents
+}
+
+func (c Currency) GreaterThan(c2 Currency) bool {
+	return c.cents > c2.cents
+}
+
+func (c Currency) LessThan(c2 Currency) bool {
+	return c.cents < c2.cents
+}
+
+func (c Currency) GreaterThanOrEqual(c2 Currency) bool {
+	return c.cents >= c2.cents
+}
+
+func (c Currency) LessThanOrEqual(c2 Currency) bool {
+	return c.cents <= c2.cents
+}
+
 func (c Currency) String() string {
 	return fmt.Sprintf("$%.2f", c.Float64())
 }
