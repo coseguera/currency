@@ -116,3 +116,39 @@ func TestCurrency_String(t *testing.T) {
 		})
 	}
 }
+
+func TestParseCurrency(t *testing.T) {
+	tests := []struct {
+		name string // description of this test case
+		// Named input parameters for target function.
+		s       string
+		want    Currency
+		wantErr bool
+	}{
+		{"dollar", "1", NewCurrency(1), false},
+		{"dollars", "2", NewCurrency(2), false},
+		{"dollarsWithCents", "2.38", NewCurrency(2.38), false},
+		{"badText", "nope", Currency{}, true},
+		{"badCharacter", "n", Currency{}, true},
+		{"negativeDollar", "-1", NewCurrency(-1), false},
+		{"negativeDollars", "-2", NewCurrency(-2), false},
+		{"negativeDollarsWithCents", "-2.38", NewCurrency(-2.38), false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, gotErr := ParseCurrency(tt.s)
+			if gotErr != nil {
+				if !tt.wantErr {
+					t.Errorf("ParseCurrency() failed: %v", gotErr)
+				}
+				return
+			}
+			if tt.wantErr {
+				t.Fatal("ParseCurrency() succeeded unexpectedly")
+			}
+			if got != tt.want {
+				t.Errorf("ParseCurrency() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
