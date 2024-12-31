@@ -100,13 +100,13 @@ func TestCurrency_String(t *testing.T) {
 		c    Currency
 		want string
 	}{
-		{"Positive", NewCurrency(10.50), "$10.50"},
-		{"Negative", NewCurrency(-10.50), "$-10.50"},
-		{"Zero", NewCurrency(0), "$0.00"},
-		{"Positive with one decimal", NewCurrency(10.5), "$10.50"},
-		{"Negative with one decimal", NewCurrency(-10.5), "$-10.50"},
-		{"Millions", NewCurrency(2000000), "$2,000,000.00"},
-		{"Millions with one decimal", NewCurrency(2000000.5), "$2,000,000.50"},
+		{"Positive", NewCurrency(10.50), "10.50"},
+		{"Negative", NewCurrency(-10.50), "-10.50"},
+		{"Zero", NewCurrency(0), "0.00"},
+		{"Positive with one decimal", NewCurrency(10.5), "10.50"},
+		{"Negative with one decimal", NewCurrency(-10.5), "-10.50"},
+		{"Millions", NewCurrency(2000000), "2,000,000.00"},
+		{"Millions with one decimal", NewCurrency(2000000.5), "2,000,000.50"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

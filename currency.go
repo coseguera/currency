@@ -124,5 +124,5 @@ func (c Currency) IsNegative() bool {
 
 func (c Currency) String() string {
 	p := message.NewPrinter(c.language)
-	return p.Sprintf("$%.2f", c.Float64())
+	return p.Sprintf("%.2f", c.Float64())
 }
